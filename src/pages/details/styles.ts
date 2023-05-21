@@ -160,7 +160,7 @@ export const LogoContainer = styled.div`
 
   figure{
     width: 100%;
-    max-width: 400px;
+    max-width: 200px;
     height: auto;
 
     img{
