@@ -4,9 +4,6 @@ import { borders } from '../../styles/template/border'
 import { colors } from '../../styles/template/colors'
 import { fontWeights, fontSizes } from '../../styles/template/typographys'
 
-interface ILogoContainerProps {
-  isMobile: boolean;
-}
 
 export const Wrapper = styled.div`
   margin-top: 50px;
@@ -131,7 +128,7 @@ export const Wrapper = styled.div`
   }
 
   @media(max-width: 485px){
-    padding-top: ${spacings.md};
+    padding-top: ${spacings.x3};
 
     .header{
       gap: ${spacings.sm};
@@ -158,10 +155,25 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const LogoContainer = styled.div<ILogoContainerProps>`
+export const LogoContainer = styled.div`
   position: absolute;
-  top: ${({isMobile}) => isMobile ? '10px' : 0};
-  cursor: pointer;
+
+  figure{
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+
+    img{
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  @media(max-width: 485px){
+    figure{
+      max-width: 150px;
+    } 
+  }
 `;
 
 export const Footer = styled.footer`

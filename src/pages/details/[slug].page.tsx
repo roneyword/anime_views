@@ -13,8 +13,7 @@ import toast from '@/utils/toast';
 import Image from 'next/image';
 import logo from '../../assets/header/logo.svg';
 import Link from 'next/link';
-import { ArrowBendLeftDown, ArrowCircleLeft, ArrowFatLeft, ArrowFatLineLeft, ArrowFatLinesLeft, ArrowLeft, ArrowLineLeft, ArrowSquareLeft, ArrowUUpLeft, Star } from 'phosphor-react';
-import { colors } from '@/styles/template/colors';
+import Header from '@/components/header';
 
 export default function Details({ anime, episodes }: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,8 +39,8 @@ export default function Details({ anime, episodes }: any) {
   const handleLoadMore = async () => {
     setIsLoadingMore(true);
     try {
-      const {data} = await api.get(`/anime/${id}/episodes?page[limit]=14&page[offset]=${offset + 14}`);
-  
+      const { data } = await api.get(`/anime/${id}/episodes?page[limit]=14&page[offset]=${offset + 14}`);
+
       if (!data.data.length) {
         setShowButtonLoadMore(false);
         return;
@@ -55,19 +54,19 @@ export default function Details({ anime, episodes }: any) {
         seasonNumber: episode.attributes.seasonNumber,
         img: episode.attributes.thumbnail?.original,
       }));
-  
+
       setEpisodeList([...episodeList, ...episodes]);
       setOffset(offset + 10);
-      
+
     } catch (error) {
       toast({
         type: "error",
-        text: "Falha ao efetuar busca", 
+        text: "Falha ao efetuar busca",
         duration: 5000
       });
     } finally {
       setIsLoadingMore(false);
-    }    
+    }
   }
 
   const showModal = () => {
@@ -86,7 +85,7 @@ export default function Details({ anime, episodes }: any) {
     setShowButtonLoadMore(!(episodeList.length % 14))
   }, [episodeList])
 
-  
+
   useEffect(() => {
     window.addEventListener('resize', handleResize)
   })
@@ -98,26 +97,21 @@ export default function Details({ anime, episodes }: any) {
       </Head>
 
       <Container id={id}>
-        <Link href="/">
-          <LogoContainer isMobile={dimensions < 486} title="Anime View - Início">
-            {dimensions < 486 ? 
-              (
-                <ArrowCircleLeft
-                  size={32}
-                  color={colors.white}
-                  weight="fill"
-                />
-              ) : (
-                <Image
-                  src={logo}
-                  height={200}
-                  quality={50}
-                  priority
-                  alt='imagem da logo do site'
-                />
-            )}
-            </LogoContainer>
-        </Link>
+        <LogoContainer>
+          <Link href="/">
+            <figure>
+              <Image
+                src={logo}
+                height={200}
+                quality={50}
+                priority
+                alt='imagem da logo do site'
+              />
+            </figure>
+
+          </Link>
+        </LogoContainer>
+
         <Banner img={banner} description='imagem de fundo do dragon ball gt' />
 
         <Wrapper>
@@ -128,7 +122,7 @@ export default function Details({ anime, episodes }: any) {
               </figure>
             ) : (
               <div className="skeleton-container">
-                <Skeleton.Image className="skeleton-image"/>
+                <Skeleton.Image className="skeleton-image" />
               </div>
             )}
 
@@ -173,7 +167,7 @@ export default function Details({ anime, episodes }: any) {
 
       {showButtonLoadMore && (
         <Footer>
-          <Button 
+          <Button
             type="primary"
             shape="round"
             loading={isLoadingMore}
@@ -221,9 +215,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     episodeCount: responseAnime.data.attributes.episodeCount,
     youtubeVideoId: responseAnime.data.attributes.youtubeVideoId,
     categories: responseCategories.data
-    .filter((included: any) => responseAnime.data.relationships.categories.data
-    .map((category: any) => category.id).includes(included.id))
-    .map((category: any) => category.attributes.title).slice(0, 3)
+      .filter((included: any) => responseAnime.data.relationships.categories.data
+        .map((category: any) => category.id).includes(included.id))
+      .map((category: any) => category.attributes.title).slice(0, 3)
   };
 
   const episodes = responseEpisodes.data.map((episode: any) => ({

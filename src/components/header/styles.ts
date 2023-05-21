@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { colors } from '../../styles/template/colors'
+import { spacings } from '../../styles/template/spacings'
 
 export const HeaderContainer = styled.header`
 position: absolute;
@@ -18,16 +19,13 @@ height: 120px;
   figure{
     position: relative;
     width: 100%;
-    max-width: 500px;
-    height: 150px;
+    max-width: 400px;
+    margin: ${spacings.md} 0;
+    line-height: 0;
 
     img{
-      position: absolute;
-      top: 50%;
-      left: 50%;
       width: 100%;
       height: auto;
-      transform: translate(-50%, -50%);
     }
   }
 
@@ -59,13 +57,4 @@ height: 120px;
       }
     }
   }
-  @media(max-width: 485px){
-    .header-wrapper{
-
-      figure{
-        height: 100px;
-      }
-    }
-  }
-
 `

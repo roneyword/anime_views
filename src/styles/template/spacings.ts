@@ -20,4 +20,5 @@ export const spacings = {
   xl: "2.5rem",   // ${spacings.xl}
   xx: "3rem",     // ${spacings.xx}
   x2: "3.5rem",   // ${spacings.x2}
+  x3: "5rem",   // ${spacings.x2}
 }
