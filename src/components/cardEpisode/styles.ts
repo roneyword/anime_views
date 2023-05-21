@@ -81,3 +81,20 @@ export const CardContainer = styled.ul`
   }
 
 `
+
+export const ModalContent = styled.div`
+  .modal-title {
+    font-size: ${fontSizes.ls};
+    line-height: 1.2;
+  }
+
+  .modal-air-date {
+    font-size: ${fontSizes.md};
+    margin-top: ${spacings.ls};
+    display: flex;
+
+    span {
+      margin-right: ${spacings.xs};
+    }
+  }
+`;

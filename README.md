@@ -2,8 +2,6 @@
 
 ![Banner](https://animesflix.net/_theme/img/image-header.jpg)
 
-# Link de acesso [aqui](https://anime-views-three.vercel.app/).
-
 Este é um site desenvolvido utilizando o framework Next.js na versão 13, com a biblioteca de estilização Ant Design, TypeScript e a integração com a API Kitsu, que fornece dados sobre animes.
 
 ## Finalidade
@@ -35,21 +33,20 @@ O site de animes desenvolvido possui as seguintes funcionalidades:
 4. **Paginação:** Quando a lista de animes é extensa, o site oferece recursos de paginação por meio do botão "See more" para facilitar a navegação.
 
 ## Estrutura do projeto
-
-├── components/ # Componentes React reutilizáveis <br>
-│ ├── Banner.tsx # Componente de banner <br>
-│ ├── Card.tsx # Componente de card <br>
-│ ├── CardEpisodes.tsx # Componente de card de episódios <br>
-│ ├── Header.tsx # Componente de cabeçalho <br>
-│ ├── Skeletons.tsx # Componente de placeholders de carregamento <br>
-│ ├── StarRating.tsx # Componente de classificação de estrelas <br>
-│ ├── Tags.tsx # Componente de tags <br>
-│ └── Toast.tsx # Componente de mensagem de toast <br>
-├── pages/ # Páginas do Next.js <br>
-├── styles/ # Estilos globais e estilos de componentes <br>
-├── public/ # Arquivos estáticos públicos <br>
-├── api/ # Lógica de chamadas de API <br>
-├── utils/ # Utilitários e funções auxiliares <br>
+├── components/    # Componentes React reutilizáveis <br>
+│   ├── Banner.tsx          # Componente de banner <br>
+│   ├── Card.tsx            # Componente de card <br>
+│   ├── CardEpisodes.tsx    # Componente de card de episódios <br>
+│   ├── Header.tsx          # Componente de cabeçalho <br>
+│   ├── Skeletons.tsx       # Componente de placeholders de carregamento <br>
+│   ├── StarRating.tsx      # Componente de classificação de estrelas <br>
+│   ├── Tags.tsx            # Componente de tags <br>
+│   └── Toast.tsx           # Componente de mensagem de toast <br>
+├── pages/         # Páginas do Next.js <br>
+├── styles/        # Estilos globais e estilos de componentes <br>
+├── public/        # Arquivos estáticos públicos <br>
+├── api/           # Lógica de chamadas de API <br>
+├── utils/         # Utilitários e funções auxiliares <br>
 └── ...
 
 ## Como executar o site
@@ -66,12 +63,11 @@ Para executar o site em sua própria máquina, siga as etapas abaixo:
 
 5. Acesse o site no seu navegador através do endereço `http://localhost:3000`.
 
-## Prototipo
 
+## Prototipo
 O prototipo deste projeto foi desenvolvido usando a ferramenta de design FIGMA, para visualizar clique [aqui](https://www.figma.com/file/hqQAxMhHzeF5O7zczrtRwm/Anime_views?type=design&node-id=0%3A1&t=ubB7uAXhHiWWVh7p-1).
 
 ## Licença
-
 Este projeto está licenciado sob a Licença MIT.
 
 ## Conclusão

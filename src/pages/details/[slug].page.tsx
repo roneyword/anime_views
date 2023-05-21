@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import Banner from '@/components/banner';
-import { Footer, Wrapper } from './styles';
+import { Footer, LogoContainer, Wrapper } from './styles';
 import { Container } from '@/styles/grid';
 import { Button, Modal, Skeleton } from 'antd';
 import Tags from '@/components/tags';
@@ -10,6 +10,11 @@ import api from '@/api';
 import Head from 'next/head'
 import CardEpisode from '@/components/cardEpisode';
 import toast from '@/utils/toast';
+import Image from 'next/image';
+import logo from '../../assets/header/logo.svg';
+import Link from 'next/link';
+import { ArrowBendLeftDown, ArrowCircleLeft, ArrowFatLeft, ArrowFatLineLeft, ArrowFatLinesLeft, ArrowLeft, ArrowLineLeft, ArrowSquareLeft, ArrowUUpLeft, Star } from 'phosphor-react';
+import { colors } from '@/styles/template/colors';
 
 export default function Details({ anime, episodes }: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,6 +22,7 @@ export default function Details({ anime, episodes }: any) {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [offset, setOffset] = useState(0);
   const [showButtonLoadMore, setShowButtonLoadMore] = useState(false);
+  const [dimensions, setDimensions] = useState(0)
 
   const {
     id,
@@ -34,7 +40,7 @@ export default function Details({ anime, episodes }: any) {
   const handleLoadMore = async () => {
     setIsLoadingMore(true);
     try {
-      const {data} = await api.get(`/anime/${id}/episodes?page[limit]=10&page[offset]=${offset + 10}`);
+      const {data} = await api.get(`/anime/${id}/episodes?page[limit]=14&page[offset]=${offset + 14}`);
   
       if (!data.data.length) {
         setShowButtonLoadMore(false);
@@ -72,9 +78,18 @@ export default function Details({ anime, episodes }: any) {
     setIsModalOpen(false);
   };
 
+  const handleResize = () => {
+    setDimensions(window.innerWidth)
+  }
+
   useEffect(() => {
-    setShowButtonLoadMore(!(episodeList.length % 10))
+    setShowButtonLoadMore(!(episodeList.length % 14))
   }, [episodeList])
+
+  
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+  })
 
   return (
     <>
@@ -83,6 +98,26 @@ export default function Details({ anime, episodes }: any) {
       </Head>
 
       <Container id={id}>
+        <Link href="/">
+          <LogoContainer isMobile={dimensions < 486} title="Anime View - Início">
+            {dimensions < 486 ? 
+              (
+                <ArrowCircleLeft
+                  size={32}
+                  color={colors.white}
+                  weight="fill"
+                />
+              ) : (
+                <Image
+                  src={logo}
+                  height={200}
+                  quality={50}
+                  priority
+                  alt='imagem da logo do site'
+                />
+            )}
+            </LogoContainer>
+        </Link>
         <Banner img={banner} description='imagem de fundo do dragon ball gt' />
 
         <Wrapper>
@@ -168,7 +203,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const responses = await Promise.all([
     api.get(`/anime/${id}?include=categories,episodes`),
     api.get(`/anime/${id}/categories`),
-    api.get(`/anime/${id}/episodes`),
+    api.get(`/anime/${id}/episodes?page[limit]=14`),
   ]);
 
   const responseAnime = responses[0]?.data;
@@ -195,6 +230,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     id: episode.id,
     title: responseAnime.data.attributes?.canonicalTitle,
     epTitle: episode.attributes.canonicalTitle,
+    synopsis: episode.attributes.synopsis,
+    airDate: episode.attributes.airdate,
     epNumber: episode.attributes.number,
     seasonNumber: episode.attributes.seasonNumber,
     img: episode.attributes.thumbnail?.original || defaultImg,

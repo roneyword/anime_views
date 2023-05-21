@@ -4,6 +4,10 @@ import { borders } from '../../styles/template/border'
 import { colors } from '../../styles/template/colors'
 import { fontWeights, fontSizes } from '../../styles/template/typographys'
 
+interface ILogoContainerProps {
+  isMobile: boolean;
+}
+
 export const Wrapper = styled.div`
   margin-top: 50px;
   padding-top: 250px;
@@ -152,6 +156,12 @@ export const Wrapper = styled.div`
       }
     }
   }
+`;
+
+export const LogoContainer = styled.div<ILogoContainerProps>`
+  position: absolute;
+  top: ${({isMobile}) => isMobile ? '10px' : 0};
+  cursor: pointer;
 `;
 
 export const Footer = styled.footer`
